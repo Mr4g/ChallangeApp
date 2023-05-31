@@ -1,94 +1,51 @@
-﻿/* Przygotuj program, który policzy ile jakich cyfr 
-wystepuje w podanej liczbie:
+﻿
+using ChallangeApp;
 
-Przykład : 
-Wynniki dla liczby 4566 
-0 => 0 
-1 => 0 
-2 => 0
-3 => 0
-4 => 1
-5 => 1
-6 => 2 
-7 => 0
-8 => 0
-9 => 0         */
+/*
 
+Tak, w nawiasie podane są parametry konstruktora klasy Employee, które określają imię, 
+nazwisko i wiek pracownika. Konstruktor jest specjalną metodą, 
+która jest wywoływana podczas tworzenia nowego obiektu danej klasy. 
+Parametry konstruktora pozwalają na ustawienie wartości pól obiektu przy jego tworzeniu. 
+To jak podanie danych osobowych przy rejestracji.
 
-// zdefiniowanie int 
-int number = 1230456789;
-// zamiana int na string z wykorzystaniem metody .ToString();
-string numebrInString = number.ToString();
-// wykonanie tablicy charów metodą .ToArray
-char[] letters = numebrInString.ToArray();
+*/
 
-var numer0 = 0;
-var numer1 = 0;
-var numer2 = 0;
-var numer3 = 0; 
-var numer4 = 0;
-var numer5 = 0;
-var numer6 = 0;
-var numer7 = 0;
-var numer8 = 0;
-var numer9 = 0;
+Employee employee1 = new Employee("Łukasz", "Sambor", 29);    // tworzenie obiektu z odpowiednim parametrem konstruktora klasy Employee 
+Employee employee2 = new Employee("Piotr", "Nowak", 22);       // konstruktor to specjalna metoda, która jest wywołana przez tworzenie nowego obiektu danej klasy
+Employee employee3 = new Employee("Krzysztof", "Sałata", 33);   // Parametry konstruktora pozwalają na ustawienie wartości pól obiektu przy jego tworzeniu 
 
+employee1.AddScore(5);     // na piechotę przydzielanie punktów 
+employee1.AddScore(9);
+employee1.AddScore(9);
+employee2.AddScore(1);
+employee2.AddScore(1);
+employee2.AddScore(1);
+employee3.AddScore(9);
+employee3.AddScore(7);
+employee3.AddScore(3);
 
-foreach (char letter in letters)
-
+List<Employee> scoreBoard = new List<Employee>()    //tworzymy listę typie naszego obiektu ! 
 {
+    employee1, employee2, employee3
+};
 
 
-    if (letter == '0')
-    {
-        numer0++;
-    }
-    else if (letter == '1')
-    {
-        numer1++;
-    }
-    else if (letter == '2')
-    {
-        numer2++;
-    }
-    else if (letter == '3') 
-    {
-        numer3++;
-    }
-    else if (letter == '4')
-    {
-        numer4++;
-    }
-    else if (letter == '5')
-    {
-        numer5++;
-    }
-    else if (letter == '6')
-    {
-        numer6++;
-    }
-    else if (letter == '7')
-    {
-        numer7++;
-    }
-    else if (letter == '8')
-    {
-        numer8++;
-    }
-    else if (letter == '9')
-    {
-        numer9++;
-    }
 
+
+
+int maxResult = -1;      // zmienna przechowująca maksymalny wynik
+Employee employeeWithMaxResult = null;  // kontenerek na przechowanie najlepszego pracownika 
+
+foreach (var employee in scoreBoard)    // wyszukiwanie pracownika z najlpeszym wynikiem 
+{
+    if (employee.Result > maxResult)
+    {
+        maxResult = employee.Result;
+        employeeWithMaxResult = employee; 
+    }
 }
-
-Console.WriteLine("0 => " + numer0);
-Console.WriteLine("1 => " + numer1);
-Console.WriteLine("2 => " + numer2);
-Console.WriteLine("3 => " + numer3);
-Console.WriteLine("4 => " + numer4);
-Console.WriteLine("5 => " + numer5);
-Console.WriteLine("6 => " + numer6);
-Console.WriteLine("7 => " + numer7);
-Console.WriteLine("8 => " + numer8);
-Console.WriteLine("9 => " + numer9);
+Console.WriteLine("Imię : " + employeeWithMaxResult.Name);
+Console.WriteLine("Nazwisko : " + employeeWithMaxResult.Surname);
+Console.WriteLine("Wiek : " + employeeWithMaxResult.Age);
+Console.WriteLine("Wynik : " + employeeWithMaxResult.Result);
