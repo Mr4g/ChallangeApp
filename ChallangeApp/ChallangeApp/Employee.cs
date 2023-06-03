@@ -12,7 +12,7 @@ a następnie wyświetl jego dane oraz wynik.
 
 namespace ChallangeApp
 {
-    internal class Employee
+    public class Employee
     {
 
         public static int theBestScore; 
@@ -43,6 +43,7 @@ namespace ChallangeApp
         public void AddScore(int points)
         {
             this.Score.Add(points);
+            
         }
         
 
