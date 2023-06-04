@@ -15,14 +15,19 @@ namespace ChallangeApp
     public class Employee
     {
 
-        public static int theBestScore; 
+        public static int theBestScore;
 
 
         public Employee(string name, string surname, int age) // tworzymy konstruktor 
         {
             this.Name = name;
             this.Surname = surname;
-            this.Age = age; 
+            this.Age = age;
+        }
+
+        public Employee(string name)
+        {
+            this.Name=name;
         }
 
         public string Name { get; private set; }
