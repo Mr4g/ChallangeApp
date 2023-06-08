@@ -10,45 +10,59 @@ a następnie wyświetl jego dane oraz wynik.
 
 */
 
+
 namespace ChallangeApp
 {
     public class Employee
     {
 
-        public static int theBestScore;
+        private List<float> grades = new List<float>();   // tworzenie listy liczb zmiennoprzecinkowych
 
 
-        public Employee(string name, string surname, int age) // tworzymy konstruktor 
+        public Employee(string name, string surname) // tworzymy konstruktor 
         {
             this.Name = name;
             this.Surname = surname;
-            this.Age = age;
+            
         }
-
         public Employee(string name)
         {
             this.Name=name;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; private set; }  // tworzenie zmiennych z propertis
         public string Surname { get; private set; }
-        public int Age { get; private set;}
-        
-        private List<int> Score = new List<int>();   // tworzenie listy liczb całkowitych 
+       
 
-        
-        public int Result 
+        public void AddGrade(float grade)   // tworzenie funkcji void, która nic nie zwraca 
         {
-            get
-            {
-                return this.Score.Sum();
-            }
+            this.grades.Add(grade);
+            
         }
 
-        public void AddScore(int points)
-        {
-            this.Score.Add(points);
+
+        // tworzenie metody do zwracania całych obiektów 
+        public Statistics GetStatistics() 
+        { 
+            var statistics = new Statistics();    // tworzenie nowego obiektu statistics i poniże jego wypełnienie
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
             
+            foreach (var grade in this.grades) // this. odwołuje się do obiektu w którym jesteśmy !! 
+                                               // więc przejdziemy przez wszystkie oceny w tej liście 
+            {                                  // która jest w tej klasie ! 
+                statistics.Max = Math.Max(statistics.Max, grade);  // przy pierwszym obiegu pętli każdy "grade"
+                statistics.Min = Math.Min(statistics.Min, grade);  // będzie większy niż float.MinValue 
+                statistics.Average += grade;                       // ta funkcja z Math.Max będzie porównywać wartości 
+                                                                   // między statistics.Max a grade i będzie przypisywać do 
+                                                                   // statistic.Max maksymalną wartość !! 
+
+            }
+     
+            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
+
+            return statistics;
         }
         
 
