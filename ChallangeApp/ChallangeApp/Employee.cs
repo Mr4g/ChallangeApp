@@ -32,12 +32,52 @@ namespace ChallangeApp
 
         public string Name { get; private set; }  // tworzenie zmiennych z propertis
         public string Surname { get; private set; }
-       
+
 
         public void AddGrade(float grade)   // tworzenie funkcji void, która nic nie zwraca 
         {
-            this.grades.Add(grade);
-            
+            //Rzutowanie to inna możliwość zamiany naszego typu zmiennych 
+            int valueInInt = (int)grade;   // zamiana dokona się z float na int ale obetnie
+                                           // całkowice nasze końcówki 
+            int valueInInt1 = (int)Math.Ceiling(grade); // zaokręglanie do górnej warości 
+            int valieInInt2 = (int)Math.Floor(grade);   // zaokrąglenie do dolnej wartoścu
+
+            if (grade >= 0 && grade <= 100)      // podstawowa walidacja danych 
+            {
+                this.grades.Add(grade);
+            }
+            else
+            {
+                Console.WriteLine("invalid grade value");  // jeśli wykryjemy złe
+            }                                               // dane wyśliwetlimy to na consoli
+        }
+
+        public void AddGrade(int grade)
+        {
+            float intGrade = grade;
+            this.grades.Add(intGrade);
+        }
+
+        public void AddGrade(double grade)
+        {
+            float doubleGrade = (float)grade;
+            this.grades.Add(doubleGrade);
+        }
+
+
+
+        
+        public void AddGrade(string grade)   // tworzenie funkcji o tej samej nazwie
+                                             // z innym parametrem
+        {
+            if(float.TryParse(grade, out float result))  // TryParse sprawdza czy zmienną 
+            {                                            // możemy sparcować na float 
+                this.AddGrade(result);
+            }
+            else
+            {
+                Console.WriteLine("String is not float");
+            }
         }
 
 
@@ -64,8 +104,5 @@ namespace ChallangeApp
 
             return statistics;
         }
-        
-
-
     }
 }

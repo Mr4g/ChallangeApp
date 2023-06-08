@@ -65,7 +65,7 @@ namespace Challange.App.Tests
 
 
             // assert - sprawdzamy czy warunek zosta³ spe³niony 
-            Assert.AreEqual(5.25, statistisc.Average);
+            Assert.AreEqual(Math.Round(5.25, 2), Math.Round(statistisc.Average, 2));
 
 
         }

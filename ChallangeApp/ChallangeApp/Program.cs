@@ -2,7 +2,8 @@
 
 var employee1 = new Employee("Łukasz", "Sambor");  // tworzenie obiektu 
 
-employee1.AddGrade(2);  // dodawanie punktów do obiektów 
+employee1.AddGrade("Łukasz");  // dodawanie punktów do obiektów 
+employee1.AddGrade("2000");
 employee1.AddGrade(2);
 employee1.AddGrade(6);
 
