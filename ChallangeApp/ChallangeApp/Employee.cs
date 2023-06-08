@@ -64,9 +64,13 @@ namespace ChallangeApp
             this.grades.Add(doubleGrade);
         }
 
+        public void AddGrade(long grade)
+        {
+            float longGrade = (float)grade;
+            this.grades.Add(longGrade);
+        }
 
 
-        
         public void AddGrade(string grade)   // tworzenie funkcji o tej samej nazwie
                                              // z innym parametrem
         {
