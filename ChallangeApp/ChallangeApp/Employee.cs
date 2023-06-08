@@ -11,6 +11,8 @@ a następnie wyświetl jego dane oraz wynik.
 */
 
 
+using System.Diagnostics;
+
 namespace ChallangeApp
 {
     public class Employee
@@ -23,11 +25,11 @@ namespace ChallangeApp
         {
             this.Name = name;
             this.Surname = surname;
-            
+
         }
         public Employee(string name)
         {
-            this.Name=name;
+            this.Name = name;
         }
 
         public string Name { get; private set; }  // tworzenie zmiennych z propertis
@@ -74,7 +76,7 @@ namespace ChallangeApp
         public void AddGrade(string grade)   // tworzenie funkcji o tej samej nazwie
                                              // z innym parametrem
         {
-            if(float.TryParse(grade, out float result))  // TryParse sprawdza czy zmienną 
+            if (float.TryParse(grade, out float result))  // TryParse sprawdza czy zmienną 
             {                                            // możemy sparcować na float 
                 this.AddGrade(result);
             }
@@ -85,27 +87,87 @@ namespace ChallangeApp
         }
 
 
-        // tworzenie metody do zwracania całych obiektów 
-        public Statistics GetStatistics() 
-        { 
+        // tworzenie metody do zwracania całych obiektów w tym wypadku metoda zwróci obiekt Statistic! 
+        public Statistics GetStatisticsForeach()
+        {
             var statistics = new Statistics();    // tworzenie nowego obiektu statistics i poniże jego wypełnienie
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
-            
-            foreach (var grade in this.grades) // this. odwołuje się do obiektu w którym jesteśmy !! 
-                                               // więc przejdziemy przez wszystkie oceny w tej liście 
-            {                                  // która jest w tej klasie ! 
-                statistics.Max = Math.Max(statistics.Max, grade);  // przy pierwszym obiegu pętli każdy "grade"
-                statistics.Min = Math.Min(statistics.Min, grade);  // będzie większy niż float.MinValue 
-                statistics.Average += grade;                       // ta funkcja z Math.Max będzie porównywać wartości 
-                                                                   // między statistics.Max a grade i będzie przypisywać do 
-                                                                   // statistic.Max maksymalną wartość !! 
 
+            foreach (var grade in this.grades)
+            {
+
+                statistics.Max = Math.Max(statistics.Max, grade);
+                statistics.Min = Math.Min(statistics.Min, grade);
+                statistics.Average += grade;
             }
-     
-            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
 
+            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
+            return statistics;
+        }
+
+        public Statistics GetStatisticsWithFor()
+        {
+            var statistics = new Statistics();    // tworzenie nowego obiektu statistics i poniże jego wypełnienie
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            for (int i = 0; i < this.grades.Count; i++)
+            {
+
+                statistics.Max = Math.Max(statistics.Max, grades[i]);
+                statistics.Min = Math.Min(statistics.Min, grades[i]);
+                statistics.Average += grades[i];
+            }
+
+            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
+            return statistics;
+        }
+        public Statistics GetStatisticsWithDoWhile()
+        {
+            var statistics = new Statistics();    // tworzenie nowego obiektu statistics i poniże jego wypełnienie
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            var index = 0;
+
+            do
+            {
+
+                statistics.Max = Math.Max(statistics.Max, grades[index]);
+                statistics.Min = Math.Min(statistics.Min, grades[index]);
+                statistics.Average += grades[index];
+                index++;
+
+            } while (index < this.grades.Count);
+
+            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
+            return statistics;
+        }
+
+        public Statistics GetStatisticsWithWhile()
+        {
+            var statistics = new Statistics();    // tworzenie nowego obiektu statistics i poniże jego wypełnienie
+            statistics.Average = 0;
+            statistics.Max = float.MinValue;
+            statistics.Min = float.MaxValue;
+
+            var index = 0;
+
+            while (index < this.grades.Count)
+            {
+
+                statistics.Max = Math.Max(statistics.Max, grades[index]);
+                statistics.Min = Math.Min(statistics.Min, grades[index]);
+                statistics.Average += grades[index];
+                index++;
+
+            } 
+
+            statistics.Average /= this.grades.Count;    // dzielenie w uproszczeniu 
             return statistics;
         }
     }
