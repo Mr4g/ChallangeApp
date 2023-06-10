@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/ChallangeApp/Challange.App.Tests/UserTests.cs

@@ -2,7 +2,6 @@
 {
     public class Employee
     {
-
         private List<float> grades = new List<float>();   
 
         public Employee(string name, string surname) 
@@ -28,7 +27,7 @@
             }
             else
             {
-                Console.WriteLine("invalid grade value");  
+                throw new Exception("Invalid grade value");   
             }                                               
         }
 
@@ -58,7 +57,7 @@
             }
             else
             {
-                Console.WriteLine("String is not float");
+                throw new Exception("String is not float");   // rzucanie (throw) Exception in feature AddGrade 
             }
         }
         public void AddGrade(char grade)   
@@ -85,9 +84,8 @@
                 case 'e':
                     this.grades.Add(20);
                     break;
-                default:     
-                    Console.WriteLine("Wrong Latter");
-                    break;
+                default:
+                    throw new Exception("Wrong Latter");                
             }
         }
         public Statistics GetStatistics()
