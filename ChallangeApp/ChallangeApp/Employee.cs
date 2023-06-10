@@ -1,6 +1,4 @@
-﻿
-
-namespace ChallangeApp
+﻿namespace ChallangeApp
 {
     public class Employee
     {
@@ -36,20 +34,19 @@ namespace ChallangeApp
 
         public void AddGrade(int grade)
         {
-            float intGrade = grade;
-            this.grades.Add(intGrade);
+             float intGrade = grade;
+             this.AddGrade(intGrade);        
         }
-
         public void AddGrade(double grade)
         {
             float doubleGrade = (float)grade;
-            this.grades.Add(doubleGrade);
+            this.AddGrade(doubleGrade);
         }
 
         public void AddGrade(long grade)
         {
             float longGrade = (float)grade;
-            this.grades.Add(longGrade);
+            this.AddGrade(longGrade);
         }
 
 
@@ -57,14 +54,42 @@ namespace ChallangeApp
         {
             if (float.TryParse(grade, out float result))  
             {                                            
-                this.AddGrade(result);
+               this.AddGrade(result);
             }
             else
             {
                 Console.WriteLine("String is not float");
             }
         }
- 
+        public void AddGrade(char grade)   
+        {
+            switch(grade)     
+            {
+                case 'A':
+                case 'a':
+                    this.grades.Add(100);
+                    break;    
+                case 'B':
+                case 'b':
+                    this.grades.Add(80);
+                    break;
+                case 'C':
+                case 'c':
+                    this.grades.Add(60);
+                    break;
+                case 'D':
+                case 'd':
+                    this.grades.Add(40);
+                    break;
+                case 'E':
+                case 'e':
+                    this.grades.Add(20);
+                    break;
+                default:     
+                    Console.WriteLine("Wrong Latter");
+                    break;
+            }
+        }
         public Statistics GetStatistics()
         {
             var statistics = new Statistics();    
@@ -81,6 +106,26 @@ namespace ChallangeApp
             }
 
             statistics.Average /= this.grades.Count;    
+
+            switch (statistics.Average)
+            {
+                case var average when average >= 80:    // jeżeli ta wartość która przychodzi 
+                    statistics.AverageLetter = 'A';     // statistics.Average jest >= 80 to
+                    break;
+                case var average when average >= 60:
+                    statistics.AverageLetter = 'B';
+                    break;
+                case var average when average >= 40:
+                    statistics.AverageLetter = 'C';
+                    break;
+                case var average when average >= 20:
+                    statistics.AverageLetter = 'D';
+                    break;
+                default:
+                    statistics.AverageLetter = 'E';
+                    break;
+            }
+
             return statistics;
         }
     }

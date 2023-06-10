@@ -70,5 +70,41 @@ namespace Challange.App.Tests
 
         }
 
+        [Test]
+        public void WhenEmployeeGetGradesShouldReturnCorrectMaxValue()
+        {
+            // arrange - musz¹ byæ przygotowane dane do testu
+            var employee = new Employee("£ukasz", "Sambor");
+            employee.AddGrade("c");
+            employee.AddGrade('b');
+            employee.AddGrade(2f);
+            employee.AddGrade(111);
+
+            // act - wykonanie operacji
+            var statistisc = employee.GetStatistics();
+
+
+            // assert - sprawdzamy czy warunek zosta³ spe³niony 
+            Assert.AreEqual(80, statistisc.Max);
+
+
+        }
+
+        public void WhenEmployeeGetGradesShouldReturnCorretResultInLatter()
+        {
+            // arrange - musz¹ byæ przygotowane dane do testu
+            var employee = new Employee("£ukasz", "Sambor");
+            employee.AddGrade(100);
+            employee.AddGrade(90);
+            employee.AddGrade('b');
+
+            // act - wykonanie operacji
+            var statistisc = employee.GetStatistics();
+
+
+            // assert - sprawdzamy czy warunek zosta³ spe³niony 
+            Assert.AreEqual('A', statistisc.AverageLetter);
+
+        }
     }
 }
