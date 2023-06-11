@@ -1,22 +1,20 @@
 ﻿namespace ChallangeApp
 {
-    public class Employee : Person    
+    public class Employee : IEmployee  
     {
         private List<float> grades = new List<float>();   
 
-        public Employee()
-            : this("no name")               
-        {        
-        }
-        public Employee(string name)
-            :base(name)
-        {         
+    
+
+
+        public Employee(string name, string surname)               
+        {
+            this.Surname = surname;
+            this.Name = name;
         }
 
-        public Employee(string name, string surname, string age, char sex)
-            : base(name, surname, age, sex)               
-        {
-        }
+        public string Surname { get; private set; }
+        public string Name { get; private set; }
 
         public void AddGrade(float grade)   
         {

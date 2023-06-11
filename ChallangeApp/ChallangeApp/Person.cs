@@ -1,8 +1,9 @@
 ﻿
 namespace ChallangeApp
 {
-    public class Person   
-    {
+    public abstract class Person        //  klasa abstrakcyjną jest dla typów ogólnych których nie da się dokładnie sprecyzować 
+    {                                   // animal / mebel itp. 
+                                        // nie możemy tworzyć instacji (obiektów) dla klas abstrakcyjnych jest to zabronione
         public Person(string name)
         {
             this.Name = name;
@@ -17,9 +18,7 @@ namespace ChallangeApp
 
         public string Name { get; private set; }
         public string SurName { get; private set; }
-
         public string Age { get; private set; }
-
         public char Sex { get; private set;}
 
     } 
