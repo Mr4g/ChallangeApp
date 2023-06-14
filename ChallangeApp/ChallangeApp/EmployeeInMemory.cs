@@ -1,70 +1,63 @@
 ﻿namespace ChallangeApp
 {
-    public class Employee : IEmployee  
+    public class EmployeeInMemory : EmployeeBase
     {
-        private List<float> grades = new List<float>();   
-
-    
-
-
-        public Employee(string name, string surname)               
+        private List<float> grades = new List<float>();
+        public EmployeeInMemory(string name, string surname) 
+            : base(name, surname)
         {
-            this.Surname = surname;
-            this.Name = name;
         }
 
-        public string Surname { get; private set; }
-        public string Name { get; private set; }
-
-        public void AddGrade(float grade)   
+        public override void AddGrade(float grade)
         {
-            if (grade >= 0 && grade <= 100)     
+            if (grade >= 0 && grade <= 100)
             {
                 this.grades.Add(grade);
             }
             else
             {
-                throw new Exception("Invalid grade value");   
-            }                                               
+                throw new Exception("Invalid grade value");
+            }
         }
 
-        public void AddGrade(int grade)
+        public override void AddGrade(int grade)
         {
-             float intGrade = grade;
-             this.AddGrade(intGrade);        
+            float intGrade = grade;
+            this.AddGrade(intGrade);
         }
-        public void AddGrade(double grade)
+
+        public override void AddGrade(double grade)
         {
             float doubleGrade = (float)grade;
             this.AddGrade(doubleGrade);
         }
 
-        public void AddGrade(long grade)
+        public override void AddGrade(long grade)
         {
             float longGrade = (float)grade;
             this.AddGrade(longGrade);
         }
 
-
-        public void AddGrade(string grade)                                              
+        public override void AddGrade(string grade)
         {
-            if (float.TryParse(grade, out float result))  
-            {                                            
-               this.AddGrade(result);
+            if (float.TryParse(grade, out float result))
+            {
+                this.AddGrade(result);
             }
             else
             {
                 throw new Exception("String is not float");   // rzucanie (throw) Exception in feature AddGrade 
             }
         }
-        public void AddGrade(char grade)   
+
+        public override void AddGrade(char grade)
         {
-            switch(grade)     
+            switch (grade)
             {
                 case 'A':
                 case 'a':
                     this.grades.Add(100);
-                    break;    
+                    break;
                 case 'B':
                 case 'b':
                     this.grades.Add(80);
@@ -82,12 +75,13 @@
                     this.grades.Add(20);
                     break;
                 default:
-                    throw new Exception("Wrong Latter");                
+                    throw new Exception("Wrong Latter");
             }
         }
-        public Statistics GetStatistics()
+
+        public override Statistics GetStatistics()
         {
-            var statistics = new Statistics();    
+            var statistics = new Statistics();
             statistics.Average = 0;
             statistics.Max = float.MinValue;
             statistics.Min = float.MaxValue;
@@ -100,7 +94,7 @@
                 statistics.Average += grade;
             }
 
-            statistics.Average /= this.grades.Count;    
+            statistics.Average /= this.grades.Count;
 
             switch (statistics.Average)
             {

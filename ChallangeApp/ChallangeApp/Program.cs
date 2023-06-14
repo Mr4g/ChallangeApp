@@ -18,27 +18,32 @@ Console.WriteLine();
 //    Console.WriteLine("BOK WYKONA SIĘ ZAWSZE!");   // niezależnie od tego czy wystąpi exception czy nie 
 //}                                                  // finally wykona się zawsze ! 
 
-var sup = new Supervisor("Łukasz", "Sambor");
+var sup = new EmployeeInFile("Łukasz", "Sambor");
+sup.AddGrade(0.5f);
+sup.AddGrade(0.5f);
+sup.AddGrade(11.5f);
+sup.AddGrade('a');
 
-while (true)
-{
-    Console.WriteLine("Podaj kolejną ocenę pracownika: ...");
-    var input = Console.ReadLine();
 
-    if(input == "q")
-    {
-        break;
-    }
+//while (true)
+//{
+//    Console.WriteLine("Podaj kolejną ocenę pracownika: ...");
+//    var input = Console.ReadLine();
 
-    try                                                   // creating an exception for the AddGrade function in the while loop 
-    {
-        sup.AddGrade(input);
-    }
-    catch(Exception ex)                                  // catch Exception and write a message for exception 
-    {
-        Console.WriteLine($"Exception catched: {ex.Message}");
-    }
-}
+//    if(input == "q")
+//    {
+//        break;
+//    }
+
+//    try                                                   // creating an exception for the AddGrade function in the while loop 
+//    {
+//        sup.AddGrade(input);
+//    }
+//    catch(Exception ex)                                  // catch Exception and write a message for exception 
+//    {
+//        Console.WriteLine($"Exception catched: {ex.Message}");
+//    }
+//}
 var statistics = sup.GetStatistics();
 Console.WriteLine($"AVG: {statistics.Average:N2}");
 Console.WriteLine($"Average Letter: {statistics.AverageLetter}");
