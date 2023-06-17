@@ -11,6 +11,9 @@
 // Clasa JAK ?? 
 
 
+using System.Diagnostics.Tracing;
+using static ChallangeApp.EmployeeBase;
+
 namespace ChallangeApp
 {
     public interface IEmployee
@@ -31,7 +34,10 @@ namespace ChallangeApp
 
         void AddGrade(char grade);
 
+        event GradeAddedDelegate GradeAdded;
+
         Statistics GetStatistics();
+
 
     }
 }

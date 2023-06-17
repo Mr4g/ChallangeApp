@@ -6,7 +6,9 @@ namespace ChallangeApp
     {
         private List<float> grades = new List<float>();
 
-        private const string fileName = "grades.txt";                 // przechowujemy nazwę pliku // dlatego const  
+        private const string fileName = "grades.txt";                 // przechowujemy nazwę pliku // dlatego const
+        
+        public override event GradeAddedDelegate GradeAdded;
         public EmployeeInFile(string name, string surname)
             : base(name, surname)
         {
@@ -19,8 +21,12 @@ namespace ChallangeApp
                 using (var writer = File.AppendText(fileName))
                 {
                     writer.WriteLine(grade);
-                    base.AddGrade(grade);
-                }       
+                }
+
+                if (GradeAdded != null)      // czy ktokolowiek na ten event jest podpięty 
+                {
+                    GradeAdded(this, new EventArgs());    // wywołanie evnetu ( this. - senderem jesteśmy my więc jest this.)
+                }
             }
         }
 
@@ -115,37 +121,10 @@ namespace ChallangeApp
         {
             {
                 var statistics = new Statistics();
-                statistics.Average = 0;
-                statistics.Max = float.MinValue;
-                statistics.Min = float.MaxValue;
-
+                
                 foreach (var grade in grades)
                 {
-
-                    statistics.Max = Math.Max(statistics.Max, grade);
-                    statistics.Min = Math.Min(statistics.Min, grade);
-                    statistics.Average += grade;
-                }
-
-                statistics.Average /= grades.Count;
-
-                switch (statistics.Average)
-                {
-                    case var average when average >= 80:    // jeżeli ta wartość która przychodzi 
-                        statistics.AverageLetter = 'A';     // statistics.Average jest >= 80 to
-                        break;
-                    case var average when average >= 60:
-                        statistics.AverageLetter = 'B';
-                        break;
-                    case var average when average >= 40:
-                        statistics.AverageLetter = 'C';
-                        break;
-                    case var average when average >= 20:
-                        statistics.AverageLetter = 'D';
-                        break;
-                    default:
-                        statistics.AverageLetter = 'E';
-                        break;
+                    statistics.AddGrade(grade);
                 }
 
                 return statistics;
