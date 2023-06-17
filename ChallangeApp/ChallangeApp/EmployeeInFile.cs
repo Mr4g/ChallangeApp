@@ -14,9 +14,13 @@ namespace ChallangeApp
 
         public override void AddGrade(float grade)                   // metoda do dodawania punktów do pliku 
         {
-            using (var writer = File.AppendText(fileName))
+            if (grade >= 0 && grade <= 100)
             {
-                writer.WriteLine(grade);
+                using (var writer = File.AppendText(fileName))
+                {
+                    writer.WriteLine(grade);
+                    base.AddGrade(grade);
+                }       
             }
         }
 

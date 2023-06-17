@@ -18,7 +18,15 @@ Console.WriteLine();
 //    Console.WriteLine("BOK WYKONA SIĘ ZAWSZE!");   // niezależnie od tego czy wystąpi exception czy nie 
 //}                                                  // finally wykona się zawsze ! 
 
-var sup = new EmployeeInFile("Łukasz", "Sambor");
+var sup = new EmployeeInMemory("Łukasz", "Sambor");
+sup.GradeAdded += SupGradeAdded;                              // podpięcie metody pod nasz event 
+                                                              // jężeli event się wywoła to wywoła się metoda subskrybowana czyli SupGradeAdded 
+                                                              // tak można wywołać wiele akcji 
+void SupGradeAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Dodano punkt"); 
+}
+
 sup.AddGrade(0.5f);
 sup.AddGrade(0.5f);
 sup.AddGrade(11.5f);
